@@ -44,11 +44,16 @@ def play_round():
         for val in [int(x) for x in keeping_dices.split(",")]:
             if (val in dices):
                 kept_dices.append(val)
+                dices.remove(val)
 
-        print(f"You have kept {kept_dices}")
-        print("Rolling again (second time)...")
+        if len(kept_dices) == 5:
+            print("You have kept all dices, so we're skipping next throws")
+            return kept_dices
+        else:
+            print(f"You have kept {kept_dices}")
+            print("Rolling again (second time)...")
+            second_dices = sorted(roll_dices(5 - len(kept_dices)) + kept_dices)
 
-        second_dices = sorted(roll_dices(5 - len(kept_dices)) + kept_dices)
 
     print(f"You have rolled {second_dices}")
     keeping_dices = input("Which dices do you wanna keep? (seperated with a comma)\n")
@@ -63,22 +68,22 @@ def play_round():
         for val in [int(x) for x in keeping_dices.split(",")]:
             if (val in second_dices):
                 kept_dices.append(val)
+                second_dices.remove(val)
 
-        print(f"You have kept {kept_dices}")
-        print("Rolling again (third time)...")
-
-    third_dices = sorted(roll_dices(5 - len(kept_dices)) + kept_dices)
-
-    print(f"Congratulations, you have rolled {third_dices}")
-    print("----------------------------------------------------------")
-    # time.sleep(2)
+        if len(kept_dices) == 5:
+            print("You have kept all dices, so we're skipping next throw")
+            return kept_dices
+        else:
+            print(f"You have kept {kept_dices}")
+            print("Rolling again (third time)...")
+            third_dices = sorted(roll_dices(5 - len(kept_dices)) + kept_dices)
 
     return third_dices
 
 def print_scoreboard(scoreboard):
     scoreboard_table = PrettyTable()
     scoreboard_table.field_names = ["Id", "Field", "Score"]
-    i = 0
+    i = 1
     for key,score in scoreboard.items():
         scoreboard_table.add_row([i, key, score])
         i += 1
@@ -174,7 +179,7 @@ def fill_score_in_scoreboard(thrown_dices, scoreboard):
 
     while not empty_field_chosen:
         field_id = input("What field would you like to fill in the scoreboard? (id)\n")
-        chosen_key = list(scoreboard)[int(field_id)]
+        chosen_key = list(scoreboard)[int(field_id) - 1]
         if scoreboard[chosen_key] == None:
             empty_field_chosen = True
             score = calculate_correct_score(chosen_key, thrown_dices)
@@ -225,13 +230,17 @@ def play_game():
 
     # Only executed before starting
     print("You start with an empty scoreboard")
-    # time.sleep(2)
+    time.sleep(1)
     print_scoreboard(scoreboard)
-    # time.sleep(2)
+    time.sleep(2)
     print("Let's start the first round!")
 
     while scoreboard_contains_none:
         thrown_dices = play_round()
+        print(f"Congratulations, you have rolled {thrown_dices}")
+        print("----------------------------------------------------------")
+        time.sleep(1)
+
         scoreboard = fill_score_in_scoreboard(thrown_dices, scoreboard)
         print("Great, now scoreboard looks like this:")
         print_scoreboard(scoreboard)
@@ -246,6 +255,7 @@ def play_game():
 
     score  = calculate_total_score(scoreboard)
     print("Well played, you've finished the game.")
+    print("...")
     time.sleep(3)
     print(f"You have a final score of: {score}")
 
