@@ -5,7 +5,6 @@ from prettytable import PrettyTable
 import collections
 
 # TODO
-# - Make id's more user friendly, start counting at 1
 # - Make a shortcut and don't roll again when you decide to keep all dices
 # - Make it a multiplayer game
 # - Add README
