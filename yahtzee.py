@@ -197,7 +197,7 @@ def calculate_total_score(scoreboard):
     # Check if bonus is applicable
     total_upper_part = scoreboard["One's"] + \
         scoreboard["Two's"] + \
-        scoreboard["Third's"] + \
+        scoreboard["Three's"] + \
         scoreboard["Four's"] + \
         scoreboard["Five's"] + \
         scoreboard["Six's"]
@@ -274,7 +274,7 @@ def play_game():
     for name in player_names:
         scores[name] = calculate_total_score(scoreboards[name])
 
-    sorted_score = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1])}
+    sorted_scores = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1])}
 
     # Copied from Stackoverflow
     ordinal = lambda n: "%d%s" % (n,"tsnrhtdd"[(n//10%10!=1)*(n%10<4)*n%10::4])
