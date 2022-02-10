@@ -4,10 +4,6 @@ import time
 from prettytable import PrettyTable
 import collections
 
-# TODO
-# - Add README
-# - Make repo public
-
 def print_intro():
     print("----------------------------------------------------------")
     print("Yahtzee!")
