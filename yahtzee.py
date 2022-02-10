@@ -5,8 +5,6 @@ from prettytable import PrettyTable
 import collections
 
 # TODO
-# - Make it a multiplayer game
-#           -- https://stackoverflow.com/questions/35321722/python-prettytable-add-title-above-the-tables-header
 # - Add README
 # - Make repo public
 
