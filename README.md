@@ -7,7 +7,7 @@ It's the first project I made on my Python-learning track.
 
 `python3 yahtzee.py` (Assuming all required pip packages are installed)
 
-### Pip packages
+## Pip packages
 
 prettytable==3.0.0
 PTable==0.9.2
