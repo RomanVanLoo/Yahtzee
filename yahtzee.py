@@ -280,6 +280,7 @@ def play_game():
 
 
 # Call
-print_intro()
-play_game()
-print_outro()
+if __name__ == "__main__":
+    print_intro()
+    play_game()
+    print_outro()
